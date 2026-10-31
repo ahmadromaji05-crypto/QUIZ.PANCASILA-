@@ -3,1166 +3,287 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Asesmen Profesional Pendidikan Pancasila Kelas X - Bab 1 Subbab C & D</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <title>Kuis Pendidikan Pancasila Kelas X - Bab 1 Subbab C & D</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Cinzel:wght@600;700;800&display=swap');
-    body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-    }
-    .font-serif-title {
-      font-family: 'Cinzel', serif;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; }
+    body { background-color: #f8fafc; color: #1e293b; min-height: 100vh; display: flex; flex-direction: column; }
+    header { background: linear-gradient(135deg, #b91c1c, #991b1b); color: white; padding: 16px 24px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .header-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+    .header-title h1 { font-size: 1.1rem; font-weight: 700; }
+    .header-title p { font-size: 0.8rem; color: #fca5a5; }
+    .badge { background: rgba(0,0,0,0.25); padding: 6px 12px; border-radius: 9999px; font-size: 0.75rem; font-weight: 600; color: #fef08a; }
+    
+    main { flex: 1; max-width: 1200px; width: 100%; margin: 24px auto; padding: 0 16px; }
+    .card { background: white; border-radius: 20px; border: 1px solid #e2e8f0; padding: 28px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); }
+    
+    /* Layout Awal */
+    .start-box { max-width: 650px; margin: 40px auto; text-align: center; }
+    .rules-box { text-align: left; background: #f1f5f9; padding: 16px 20px; border-radius: 14px; margin: 20px 0; font-size: 0.88rem; line-height: 1.6; color: #334155; }
+    .rules-box ul { margin-left: 20px; margin-top: 8px; }
+    .form-group { text-align: left; margin: 20px 0; }
+    .form-group label { display: block; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; color: #475569; margin-bottom: 6px; }
+    .form-group input { width: 100%; padding: 12px 16px; border: 1px solid #cbd5e1; border-radius: 12px; font-size: 1rem; outline: none; transition: 0.2s; }
+    .form-group input:focus { border-color: #dc2626; box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.2); }
+    .error-text { color: #dc2626; font-size: 0.8rem; font-weight: 600; margin-top: 6px; display: none; }
+
+    /* Buttons */
+    .btn { display: inline-flex; align-items: center; justify-content: center; padding: 12px 24px; border-radius: 12px; font-weight: 700; font-size: 0.95rem; cursor: pointer; border: none; transition: 0.2s; }
+    .btn-red { background: linear-gradient(135deg, #dc2626, #b91c1c); color: white; width: 100%; box-shadow: 0 4px 10px rgba(220, 38, 38, 0.3); }
+    .btn-red:hover { background: #b91c1c; }
+    .btn-outline { background: white; border: 1px solid #cbd5e1; color: #334155; }
+    .btn-outline:hover { background: #f8fafc; }
+    .btn-green { background: #16a34a; color: white; }
+    .btn-green:hover { background: #15803d; }
+
+    /* Layout Soal */
+    .quiz-grid { display: grid; grid-template-columns: 1fr 300px; gap: 24px; align-items: start; }
+    @media (max-width: 868px) { .quiz-grid { grid-template-columns: 1fr; } }
+    .progress-bar-container { background: #e2e8f0; height: 8px; border-radius: 9999px; overflow: hidden; margin-bottom: 20px; }
+    .progress-bar { background: #dc2626; height: 100%; width: 2.8%; transition: width 0.3s; }
+    .q-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; font-size: 0.85rem; font-weight: 700; color: #64748b; }
+    .q-tag { background: #fee2e2; color: #991b1b; padding: 4px 10px; border-radius: 9999px; font-size: 0.75rem; }
+    .q-text { font-size: 1.05rem; font-weight: 600; line-height: 1.6; margin-bottom: 24px; color: #0f172a; }
+
+    .opt-btn { width: 100%; text-align: left; background: white; border: 1px solid #e2e8f0; border-radius: 12px; padding: 14px 16px; margin-bottom: 10px; cursor: pointer; display: flex; align-items: flex-start; gap: 12px; font-size: 0.95rem; transition: 0.15s; }
+    .opt-btn:hover { background: #f8fafc; border-color: #cbd5e1; }
+    .opt-btn.selected { background: #fef2f2; border-color: #dc2626; color: #991b1b; box-shadow: 0 0 0 2px rgba(220,38,38,0.2); }
+    .opt-badge { width: 26px; height: 26px; border-radius: 8px; background: #f1f5f9; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.8rem; flex-shrink: 0; }
+    .opt-btn.selected .opt-badge { background: #dc2626; color: white; }
+
+    /* Palet Soal */
+    .palette-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; max-height: 380px; overflow-y: auto; margin-top: 12px; }
+    .pal-btn { height: 38px; border-radius: 8px; border: 1px solid #e2e8f0; background: white; font-weight: 700; font-size: 0.8rem; cursor: pointer; }
+    .pal-btn.active { background: #dc2626; color: white; border-color: #dc2626; }
+    .pal-btn.answered { background: #1e293b; color: white; border-color: #1e293b; }
+
+    /* Hasil & Sertifikat */
+    .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 24px 0; }
+    @media (max-width: 600px) { .stat-grid { grid-template-columns: 1fr 1fr; } }
+    .stat-box { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 14px; text-align: center; }
+    .stat-label { font-size: 0.75rem; font-weight: 700; color: #64748b; text-transform: uppercase; }
+    .stat-val { font-size: 1.8rem; font-weight: 800; color: #0f172a; margin-top: 4px; }
+    
+    .cert-frame { border: 8px double #991b1b; background: white; padding: 40px; border-radius: 16px; text-align: center; max-width: 800px; margin: 0 auto; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+    .cert-frame h2 { font-size: 2.2rem; font-weight: 800; color: #1e293b; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 2px; }
+    .cert-name { font-size: 1.8rem; font-weight: 800; color: #b91c1c; margin: 16px 0; border-bottom: 2px solid #cbd5e1; display: inline-block; padding: 0 30px 8px; }
+    
     @media print {
-      body * {
-        visibility: hidden;
-      }
-      #certificate-view, #certificate-view * {
-        visibility: visible;
-      }
-      #certificate-view {
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        margin: 0;
-        padding: 0;
-      }
-      .no-print {
-        display: none !important;
-      }
-    }
-    .custom-scrollbar::-webkit-scrollbar {
-      width: 6px;
-      height: 6px;
-    }
-    .custom-scrollbar::-webkit-scrollbar-thumb {
-      background-color: #cbd5e1;
-      border-radius: 9999px;
+      body * { visibility: hidden; }
+      #cert-view, #cert-view * { visibility: visible; }
+      #cert-view { position: absolute; left: 0; top: 0; width: 100%; border: none; }
+      .no-print { display: none !important; }
     }
   </style>
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col">
+<body>
 
-  <!-- Header Global -->
-  <header class="bg-gradient-to-r from-red-700 via-red-800 to-rose-900 text-white shadow-lg sticky top-0 z-40">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-      <div class="flex items-center space-x-3">
-        <div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center border border-white/20 backdrop-blur-sm">
-          <i class="fa-solid fa-award text-yellow-300 text-xl"></i>
-        </div>
-        <div>
-          <h1 class="text-sm sm:text-base font-bold tracking-tight">Evaluasi Pembelajaran Pancasila</h1>
-          <p class="text-xs text-red-200">Kelas X Fase E - Bab 1 Subbab C & D (Standar BPIP & Kemendikbudristek)</p>
-        </div>
+  <header>
+    <div class="header-container">
+      <div class="header-title">
+        <h1>Asesmen Kompetensi Pendidikan Pancasila</h1>
+        <p>Kelas X Fase E - Bab 1 Subbab C & D</p>
       </div>
-      <div id="quiz-meta-badge" class="hidden sm:flex items-center space-x-2 bg-black/20 px-3 py-1.5 rounded-lg border border-white/10 text-xs">
-        <i class="fa-solid fa-bullseye text-amber-300"></i>
-        <span>Target Kelulusan: <strong class="text-yellow-300">85% (30/35 Soal)</strong></span>
-      </div>
+      <div class="badge">Kriteria Kelulusan: 85% (30/35 Soal)</div>
     </div>
   </header>
 
-  <!-- Kontainer Utama -->
-  <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8 flex flex-col justify-center">
+  <main>
+    <!-- 1. TAMPILAN AWAL -->
+    <div id="start-view" class="card start-box">
+      <h2 style="font-size: 1.6rem; font-weight: 800; color: #0f172a;">Evaluasi Penguasaan Materi</h2>
+      <p style="color: #64748b; font-size: 0.95rem; margin-top: 6px;">Kedudukan Pancasila & Aktualisasi Nilai-Nilai Pancasila di Era Digital</p>
 
-    <!-- 1. TAMPILAN AWAL / REGISTRASI -->
-    <div id="start-view" class="max-w-2xl mx-auto w-full bg-white rounded-3xl shadow-xl border border-slate-100 p-6 sm:p-10 text-center">
-      <div class="w-20 h-20 bg-red-50 text-red-700 rounded-3xl mx-auto flex items-center justify-center text-3xl shadow-inner mb-6">
-        <i class="fa-solid fa-graduation-cap"></i>
-      </div>
-      <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Uji Kompetensi Mandiri</h2>
-      <p class="mt-2 text-sm sm:text-base text-slate-600 max-w-md mx-auto">
-        Kedudukan Pancasila (Dasar Negara, Pandangan Hidup, Ideologi) & Aktualisasi Pancasila di Era Digital
-      </p>
-
-      <div class="mt-6 bg-slate-50 border border-slate-200/80 rounded-2xl p-4 text-left space-y-2 text-xs sm:text-sm text-slate-700">
-        <div class="font-semibold text-slate-900 flex items-center gap-2">
-          <i class="fa-solid fa-circle-info text-red-600"></i> Peraturan & Ketentuan Ujian:
-        </div>
-        <ul class="list-disc list-inside space-y-1.5 text-slate-600 ml-1">
-          <li>Jumlah soal: <strong>35 butir pilihan ganda</strong> dengan 5 opsi jawaban (A, B, C, D, E).</li>
-          <li>Kriteria kelulusan tuntas: <strong>Minimal 85%</strong> (skor 85 atau menjawab benar minimal 30 butir).</li>
-          <li>Peserta yang lulus berhak mengklaim dan mencetak <strong>E-Sertifikat Kelulusan Resmi</strong>.</li>
-          <li>Bila skor di bawah 85, peserta <strong>diwajibkan mengulang</strong> kuis demi penuntasan materi esensial.</li>
+      <div class="rules-box">
+        <strong>Ketentuan Pengerjaan:</strong>
+        <ul>
+          <li>Terdiri atas <strong>35 butir soal pilihan ganda</strong>.</li>
+          <li>Standar kelulusan adalah <strong>minimal nilai 85</strong>.</li>
+          <li>Peserta yang lulus dapat mencetak <strong>E-Sertifikat Kelulusan</strong>.</li>
+          <li>Jika nilai di bawah 85, peserta <strong>wajib mengulang kembali</strong>.</li>
         </ul>
       </div>
 
-      <div class="mt-6 text-left">
-        <label for="userName" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Nama Lengkap Peserta Ujian</label>
-        <div class="relative">
-          <i class="fa-solid fa-user absolute left-4 top-3.5 text-slate-400"></i>
-          <input type="text" id="userName" placeholder="Contoh: Muhammad Rizki Pratama" class="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-300 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-red-600 font-medium text-slate-800 transition">
-        </div>
-        <p id="name-error" class="hidden text-xs text-rose-600 mt-1.5 font-medium"><i class="fa-solid fa-triangle-exclamation mr-1"></i>Harap isi nama lengkap Anda untuk penerbitan sertifikat.</p>
+      <div class="form-group">
+        <label for="input-name">Nama Lengkap Peserta</label>
+        <input type="text" id="input-name" placeholder="Ketik nama lengkap Anda di sini..." autocomplete="off">
+        <div id="error-msg" class="error-text">Harap isi nama lengkap Anda sebelum memulai kuis.</div>
       </div>
 
-      <div class="mt-8">
-        <button onclick="startQuiz()" class="w-full py-3.5 px-6 bg-gradient-to-r from-red-600 to-rose-700 hover:from-red-700 hover:to-rose-800 text-white font-bold rounded-xl shadow-lg shadow-red-600/30 transition transform active:scale-[0.99] flex items-center justify-center gap-2">
-          <span>Mulai Asesmen Sekarang</span>
-          <i class="fa-solid fa-arrow-right"></i>
-        </button>
-      </div>
+      <button type="button" class="btn btn-red" onclick="handleStartQuiz()">Mulai Asesmen Sekarang</button>
     </div>
 
-    <!-- 2. TAMPILAN INTERAKTIF KUIS -->
-    <div id="quiz-view" class="hidden grid grid-cols-1 lg:grid-cols-4 gap-6 items-start">
-      
-      <!-- Panel Soal Utama -->
-      <div class="lg:col-span-3 bg-white rounded-3xl shadow-xl border border-slate-100 p-6 sm:p-8 flex flex-col">
-        <!-- Progress Bar & Indikator -->
-        <div class="flex items-center justify-between pb-4 border-b border-slate-100 mb-6">
-          <div class="flex items-center space-x-2">
-            <span class="px-3 py-1 bg-red-50 text-red-700 font-extrabold text-xs rounded-full uppercase tracking-wider">
-              Soal <span id="current-q-num">1</span> dari 35
-            </span>
-            <span id="question-category" class="hidden sm:inline-block px-3 py-1 bg-slate-100 text-slate-600 font-medium text-xs rounded-full">
-              Kategori
-            </span>
-          </div>
-          <div class="text-xs text-slate-500 font-semibold flex items-center gap-1.5">
-            <i class="fa-regular fa-clock text-red-600"></i>
-            <span id="timer-display">00:00</span>
-          </div>
+    <!-- 2. TAMPILAN KUIS -->
+    <div id="quiz-view" class="quiz-grid" style="display: none;">
+      <div class="card">
+        <div class="q-meta">
+          <span class="q-tag" id="q-category">Kategori</span>
+          <span id="timer-box">Waktu: 00:00</span>
         </div>
-
-        <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden mb-6">
-          <div id="quiz-progress-bar" class="bg-gradient-to-r from-red-600 to-rose-600 h-full transition-all duration-300" style="width: 2.85%;"></div>
+        <div class="progress-bar-container">
+          <div id="prog-bar" class="progress-bar"></div>
         </div>
-
-        <!-- Teks Soal -->
-        <div class="mb-6">
-          <p id="question-text" class="text-base sm:text-lg font-semibold text-slate-800 leading-relaxed">
-            Memuat butir pertanyaan...
-          </p>
-        </div>
-
-        <!-- Opsi Jawaban (A-E) -->
-        <div id="options-container" class="space-y-3 mb-8">
-          <!-- Tombol Opsi dirender secara dinamis -->
-        </div>
-
-        <!-- Tombol Aksi Navigasi -->
-        <div class="flex items-center justify-between pt-6 border-t border-slate-100">
-          <button id="prev-btn" onclick="navQuestion(-1)" class="px-5 py-2.5 rounded-xl border border-slate-300 text-slate-700 font-semibold text-sm hover:bg-slate-50 transition flex items-center gap-2">
-            <i class="fa-solid fa-chevron-left text-xs"></i>
-            <span>Sebelumnya</span>
-          </button>
-
-          <div class="flex items-center gap-3">
-            <button id="next-btn" onclick="navQuestion(1)" class="px-6 py-2.5 rounded-xl bg-red-600 text-white font-semibold text-sm hover:bg-red-700 transition flex items-center gap-2 shadow-md shadow-red-600/20">
-              <span>Selanjutnya</span>
-              <i class="fa-solid fa-chevron-right text-xs"></i>
-            </button>
-            <button id="finish-btn" onclick="confirmSubmitQuiz()" class="hidden px-6 py-2.5 rounded-xl bg-emerald-600 text-white font-bold text-sm hover:bg-emerald-700 transition shadow-md shadow-emerald-600/20 flex items-center gap-2">
-              <span>Kirim Jawaban</span>
-              <i class="fa-solid fa-check-double"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Navigasi Nomor Soal -->
-      <div class="lg:col-span-1 bg-white rounded-3xl shadow-xl border border-slate-100 p-6 flex flex-col">
-        <h3 class="text-sm font-bold text-slate-900 mb-4 flex items-center justify-between">
-          <span>Peta Navigasi Soal</span>
-          <span class="text-xs text-slate-400 font-normal"><span id="answered-count">0</span>/35 Terjawab</span>
-        </h3>
+        <div class="q-text" id="q-text">Memuat pertanyaan...</div>
+        <div id="opts-container"></div>
         
-        <div id="palette-grid" class="grid grid-cols-5 gap-2 max-h-72 lg:max-h-96 overflow-y-auto pr-1 custom-scrollbar">
-          <!-- Kotak nomor soal (1-35) -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 24px; padding-top: 18px; border-top: 1px solid #e2e8f0;">
+          <button id="btn-prev" class="btn btn-outline" onclick="stepQuestion(-1)">Sebelumnya</button>
+          <button id="btn-next" class="btn btn-red" style="width: auto;" onclick="stepQuestion(1)">Selanjutnya</button>
+          <button id="btn-submit" class="btn btn-green" style="display: none;" onclick="submitQuiz()">Kirim Jawaban</button>
         </div>
+      </div>
 
-        <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-          <div class="flex items-center gap-1.5">
-            <span class="w-3 h-3 rounded bg-red-600 inline-block"></span>
-            <span>Aktif</span>
+      <div class="card">
+        <div style="font-weight: 700; font-size: 0.9rem; margin-bottom: 8px;">Daftar Nomor Soal</div>
+        <div style="font-size: 0.8rem; color: #64748b; margin-bottom: 12px;"><span id="answered-num">0</span> dari 35 terjawab</div>
+        <div class="palette-grid" id="pal-container"></div>
+      </div>
+    </div>
+
+    <!-- 3. TAMPILAN HASIL -->
+    <div id="result-view" class="card" style="display: none; max-width: 800px; margin: 20px auto; text-align: center;">
+      <h2 id="res-title" style="font-size: 1.8rem; font-weight: 800; margin-bottom: 6px;">Hasil Evaluasi</h2>
+      <p id="res-desc" style="color: #64748b; font-size: 0.95rem;"></p>
+
+      <div class="stat-grid">
+        <div class="stat-box"><div class="stat-label">Skor Akhir</div><div class="stat-val" id="res-score">0%</div></div>
+        <div class="stat-box"><div class="stat-label">Benar</div><div class="stat-val" style="color: #16a34a;" id="res-correct">0</div></div>
+        <div class="stat-box"><div class="stat-label">Salah</div><div class="stat-val" style="color: #dc2626;" id="res-wrong">0</div></div>
+        <div class="stat-box"><div class="stat-label">Standar Lulus</div><div class="stat-val" style="color: #b91c1c;">85%</div></div>
+      </div>
+
+      <div id="res-buttons" style="display: flex; justify-content: center; gap: 12px; margin-top: 20px;"></div>
+      <div id="review-container" style="text-align: left; margin-top: 36px;"></div>
+    </div>
+
+    <!-- 4. TAMPILAN SERTIFIKAT -->
+    <div id="cert-view" style="display: none; max-width: 850px; margin: 20px auto;">
+      <div class="no-print" style="margin-bottom: 16px; display: flex; justify-content: space-between;">
+        <button class="btn btn-outline" onclick="exitCert()">Kembali ke Rincian Hasil</button>
+        <button class="btn btn-red" style="width: auto;" onclick="window.print()">Cetak / Simpan PDF</button>
+      </div>
+      <div class="cert-frame">
+        <p style="font-size: 0.85rem; font-weight: 800; letter-spacing: 2px; color: #991b1b; text-transform: uppercase;">Sertifikat Kompetensi Pembelajaran</p>
+        <h2>Sertifikat Kelulusan</h2>
+        <p style="color: #64748b; font-size: 0.85rem; margin-top: 4px;">Diberikan secara resmi kepada:</p>
+        <div class="cert-name" id="cert-student-name">Nama Peserta</div>
+        <p style="font-size: 0.95rem; color: #334155; line-height: 1.6; max-width: 600px; margin: 12px auto;">
+          Dinyatakan <strong>LULUS DENGAN PRESTASI SANGAT BAIK</strong> pada Uji Kompetensi Pendidikan Pancasila Kelas X Fase E Materi:
+          <strong>"Kedudukan Pancasila & Aktualisasi Nilai-Nilai Pancasila"</strong>
+        </p>
+        <div style="margin: 24px 0; font-size: 1.1rem; font-weight: 700; color: #16a34a;">
+          Nilai Kelulusan: <span id="cert-score-val">90%</span> (Tuntas)
+        </div>
+        <div style="display: flex; justify-content: space-around; margin-top: 40px; padding-top: 20px; border-top: 1px dashed #cbd5e1; font-size: 0.85rem; color: #64748b;">
+          <div>
+            <div style="height: 40px;"></div>
+            <strong>Guru Mata Pelajaran</strong>
           </div>
-          <div class="flex items-center gap-1.5">
-            <span class="w-3 h-3 rounded bg-slate-800 inline-block"></span>
-            <span>Dijawab</span>
-          </div>
-          <div class="flex items-center gap-1.5">
-            <span class="w-3 h-3 rounded border border-slate-300 bg-white inline-block"></span>
-            <span>Kosong</span>
+          <div>
+            <div style="height: 40px;"></div>
+            <strong>Kepala Madrasah / Sekolah</strong>
           </div>
         </div>
       </div>
     </div>
-
-    <!-- 3. TAMPILAN HASIL & EVALUASI -->
-    <div id="result-view" class="hidden max-w-4xl mx-auto w-full space-y-8">
-      
-      <!-- Skor Banner -->
-      <div class="bg-white rounded-3xl shadow-xl border border-slate-100 p-6 sm:p-10 text-center overflow-hidden relative">
-        <div id="result-badge-icon" class="w-20 h-20 rounded-3xl mx-auto flex items-center justify-center text-4xl mb-4">
-          <!-- Dynamic Icon -->
-        </div>
-        
-        <h2 id="result-status-title" class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">Status Hasil Evaluasi</h2>
-        <p id="result-status-subtitle" class="text-slate-600 text-sm mt-1 max-w-md mx-auto">Keterangan kriteria ketuntasan minimal asesmen</p>
-        
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 my-8">
-          <div class="bg-slate-50 rounded-2xl p-4 border border-slate-200/70">
-            <span class="text-xs font-semibold text-slate-500 block uppercase">Nilai Akhir</span>
-            <span id="final-percentage" class="text-3xl font-black text-slate-900">0%</span>
-          </div>
-          <div class="bg-slate-50 rounded-2xl p-4 border border-slate-200/70">
-            <span class="text-xs font-semibold text-slate-500 block uppercase">Benar</span>
-            <span id="final-correct" class="text-3xl font-black text-emerald-600">0</span>
-          </div>
-          <div class="bg-slate-50 rounded-2xl p-4 border border-slate-200/70">
-            <span class="text-xs font-semibold text-slate-500 block uppercase">Salah</span>
-            <span id="final-wrong" class="text-3xl font-black text-rose-600">0</span>
-          </div>
-          <div class="bg-slate-50 rounded-2xl p-4 border border-slate-200/70">
-            <span class="text-xs font-semibold text-slate-500 block uppercase">Standar Lulus</span>
-            <span class="text-3xl font-black text-red-700">85%</span>
-          </div>
-        </div>
-
-        <!-- Tombol Aksi Hasil -->
-        <div id="result-actions" class="flex flex-wrap items-center justify-center gap-4">
-          <!-- Dynamic buttons: Sertifikat jika >=85%, Retake jika <85% -->
-        </div>
-      </div>
-
-      <!-- Kunci Jawaban & Pembahasan Lengkap -->
-      <div class="bg-white rounded-3xl shadow-xl border border-slate-100 p-6 sm:p-10">
-        <div class="flex items-center justify-between pb-4 border-b border-slate-100 mb-6">
-          <div class="flex items-center space-x-3">
-            <div class="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center text-slate-700">
-              <i class="fa-solid fa-book-open"></i>
-            </div>
-            <div>
-              <h3 class="text-lg font-bold text-slate-900">Kunci Jawaban & Pembahasan Akademik</h3>
-              <p class="text-xs text-slate-500">Telaah komprehensif 35 butir soal berdasarkan Buku Teks Kurikulum Merdeka</p>
-            </div>
-          </div>
-          <span class="text-xs bg-slate-100 text-slate-600 font-bold px-3 py-1 rounded-full">35 Soal Teranalisis</span>
-        </div>
-
-        <div id="explanations-list" class="space-y-6">
-          <!-- List pembahasan dinamis -->
-        </div>
-      </div>
-    </div>
-
-    <!-- 4. TAMPILAN E-SERTIFIKAT KELULUSAN RESMI -->
-    <div id="certificate-view" class="hidden max-w-4xl mx-auto w-full">
-      <div class="no-print mb-4 flex justify-between items-center bg-white p-4 rounded-2xl shadow-sm border border-slate-200">
-        <button onclick="backToResult()" class="text-sm font-semibold text-slate-600 hover:text-slate-900 flex items-center gap-2">
-          <i class="fa-solid fa-arrow-left"></i> Kembali ke Rincian Hasil
-        </button>
-        <button onclick="window.print()" class="px-5 py-2.5 bg-gradient-to-r from-red-600 to-rose-700 hover:from-red-700 hover:to-rose-800 text-white font-bold rounded-xl shadow-md text-sm flex items-center gap-2">
-          <i class="fa-solid fa-print"></i> Cetak / Simpan PDF
-        </button>
-      </div>
-
-      <!-- Kanvas Sertifikat -->
-      <div class="relative bg-white border-8 border-double border-red-800 p-8 sm:p-14 rounded-2xl shadow-2xl text-center overflow-hidden">
-        <!-- Bingkai Ornamentik Sudut -->
-        <div class="absolute top-2 left-2 w-16 h-16 border-t-4 border-l-4 border-amber-600 pointer-events-none"></div>
-        <div class="absolute top-2 right-2 w-16 h-16 border-t-4 border-r-4 border-amber-600 pointer-events-none"></div>
-        <div class="absolute bottom-2 left-2 w-16 h-16 border-b-4 border-l-4 border-amber-600 pointer-events-none"></div>
-        <div class="absolute bottom-2 right-2 w-16 h-16 border-b-4 border-r-4 border-amber-600 pointer-events-none"></div>
-
-        <!-- Watermark Garuda -->
-        <div class="absolute inset-0 flex items-center justify-center opacity-[0.03] pointer-events-none">
-          <i class="fa-solid fa-shield-halved text-[30rem]"></i>
-        </div>
-
-        <div class="relative z-10 space-y-4">
-          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-red-50 border border-red-200 text-red-800 text-xs font-extrabold uppercase tracking-widest">
-            <i class="fa-solid fa-star text-amber-500"></i> Sertifikat Kompetensi Akademik
-          </div>
-
-          <h1 class="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight font-serif-title uppercase">
-            Sertifikat Kelulusan
-          </h1>
-          <p class="text-xs sm:text-sm text-slate-500 tracking-widest uppercase font-medium">Nomor Seri: <span id="cert-number">PP-X/2026/001</span></p>
-
-          <p class="text-sm sm:text-base text-slate-600 pt-4">Dengan bangga diberikan kepada:</p>
-          <div class="py-2 border-b-2 border-slate-300 max-w-xl mx-auto">
-            <h2 id="cert-name" class="text-2xl sm:text-4xl font-black text-red-700 tracking-wide font-serif-title capitalize">Nama Peserta</h2>
-          </div>
-
-          <p class="text-xs sm:text-sm text-slate-600 max-w-2xl mx-auto leading-relaxed pt-2">
-            Telah dinyatakan <strong>LULUS DENGAN PRESTASI MEMUASKAN</strong> dalam Asesmen Pembelajaran Standar Pendidikan Pancasila Jenjang SMA/SMK Kelas X Fase E pada Materi:
-            <br>
-            <span class="font-bold text-slate-800">"Kedudukan Pancasila (Dasar Negara, Pandangan Hidup, Ideologi Bangsa) & Aktualisasi Nilai-Nilai Pancasila di Era Digital"</span>
-          </p>
-
-          <div class="my-6 inline-flex items-center justify-center gap-6 px-6 py-3 bg-slate-50 rounded-2xl border border-slate-200">
-            <div>
-              <span class="block text-xs text-slate-500 font-semibold uppercase">Nilai Evaluasi</span>
-              <span id="cert-score" class="text-2xl font-black text-red-700">92%</span>
-            </div>
-            <div class="w-px h-8 bg-slate-200"></div>
-            <div>
-              <span class="block text-xs text-slate-500 font-semibold uppercase">Kualifikasi</span>
-              <span class="text-sm font-bold text-emerald-700 uppercase">Sangat Kompeten</span>
-            </div>
-            <div class="w-px h-8 bg-slate-200"></div>
-            <div>
-              <span class="block text-xs text-slate-500 font-semibold uppercase">Tanggal Terbit</span>
-              <span id="cert-date" class="text-xs font-bold text-slate-700">31 Oktober 2026</span>
-            </div>
-          </div>
-
-          <!-- Tanda Tangan -->
-          <div class="grid grid-cols-2 pt-6 max-w-2xl mx-auto">
-            <div>
-              <div class="h-14 flex items-center justify-center">
-                <span class="font-serif italic text-lg text-slate-400 font-bold">Verifikasi Sistem</span>
-              </div>
-              <div class="w-36 h-0.5 bg-slate-400 mx-auto"></div>
-              <p class="text-xs font-bold text-slate-800 mt-1">Koordinator Kurikulum</p>
-              <p class="text-[10px] text-slate-500">Pendidikan Pancasila Fase E</p>
-            </div>
-            <div>
-              <div class="h-14 flex items-center justify-center">
-                <div class="w-12 h-12 rounded-full border-2 border-red-700 flex items-center justify-center text-red-700 text-xs font-bold">
-                  VALID
-                </div>
-              </div>
-              <div class="w-36 h-0.5 bg-slate-400 mx-auto"></div>
-              <p class="text-xs font-bold text-slate-800 mt-1">Kepala Pusat Asesmen</p>
-              <p class="text-[10px] text-slate-500">Direktorat Pembinaan Ideologi</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
   </main>
 
-  <footer class="bg-white border-t border-slate-200 py-4 text-center text-xs text-slate-500 no-print">
-    <div class="max-w-7xl mx-auto px-4">
-      Kurikulum Merdeka 2023/2026 &bull; Pembelajaran Berdampak Profil Pelajar Pancasila &bull; Kriteria Ketuntasan 85%
-    </div>
-  </footer>
-
   <script>
-    // BANK DATA SOAL (35 BUTIR LENGKAP TENTANG SUBBAB C & D)
-    const questionsData = [
-      // KELOMPOK C: KEDUDUKAN PANCASILA (15 Soal)
+    // DATA PERTANYAAN (35 SOAL MATERI BAB 1 SUBBAB C & D)
+    const questions = [
       {
-        id: 1,
-        category: "Subbab C: Kedudukan Pancasila",
-        question: "Dalam pidato 1 Juni 1945 di hadapan sidang BPUPK, Sukarno mengusulkan istilah 'filosofische grondslag' untuk dasar negara Indonesia merdeka. Istilah tersebut berasal dari bahasa Belanda yang secara terminologis bermakna...",
-        options: [
-          "Pandangan hidup yang berkembang secara turun-temurun dalam adat istiadat suku bangsa",
-          "Filsafat atau pemikiran mendalam yang menjadi norma dasar berdirinya suatu negara",
-          "Pedoman praktis penyelenggaraan administrasi birokrasi pemerintahan daerah",
-          "Doktrin politik luar negeri untuk menghadapi persaingan kekuatan global dunia",
-          "Aturan hukum formal pidana yang mengatur hak kepemilikan perseorangan"
-        ],
-        correct: 1,
-        explanation: "Berdasarkan Buku Pendidikan Pancasila Bab 1 Halaman 8 dan 30, istilah 'filosofische grondslag' berasal dari bahasa Belanda yang berarti filsafat atau pemikiran mendalam yang menjadi fondasi atau norma dasar (dasar falsafah) bagi sebuah negara yang merdeka."
+        cat: "Kedudukan Pancasila",
+        q: "1. Sukarno mengusulkan istilah 'filosofische grondslag' dalam pidatonya pada tanggal 1 Juni 1945. Istilah tersebut berarti...",
+        opts: ["Pandangan hidup perorangan", "Filsafat atau norma dasar bagi negara merdeka", "Pedoman hukum perdata tertulis", "Deklarasi militer gabungan", "Tata tertib parlemen nasional"],
+        ans: 1,
+        exp: "Filosofische grondslag diambil dari bahasa Belanda yang berarti fondasi falsafah atau pikiran mendalam yang menjadi dasar norma negara."
       },
       {
-        id: 2,
-        category: "Subbab C: Kedudukan Pancasila",
-        question: "Selain 'filosofische grondslag', Sukarno menyebut istilah 'weltanschauung' sebanyak lebih dari 30 kali dalam pidatonya. Makna Pancasila sebagai weltanschauung bangsa Indonesia adalah...",
-        options: [
-          "Peraturan tertulis tertinggi yang memiliki sanksi hukum pidana memaksa",
-          "Perjanjian bilateral antarnegara berdaulat dalam forum internasional",
-          "Sudut pandang atau cara berpikir bangsa Indonesia dalam memandang dunia dan sekitarnya",
-          "Sistem kekuasaan mutlak yang dijalankan lembaga kepresidenan secara otoritatif",
-          "Kompilasi undang-undang formal yang diterbitkan oleh parlemen bersama presiden"
-        ],
-        correct: 2,
-        explanation: "Halaman 30-31 menyebutkan weltanschauung bermakna sebuah perspektif, pedoman batiniah, atau cara pandang yang dimiliki suatu bangsa untuk melihat dan berpikir tentang realitas sosial dan alam di sekitarnya."
+        cat: "Kedudukan Pancasila",
+        q: "2. Istilah 'weltanschauung' yang disebut Sukarno lebih dari 30 kali memiliki arti...",
+        opts: ["Sistem pemungutan suara", "Undang-undang hukum pidana", "Cara pandang atau sudut pandang bangsa terhadap dunia", "Tata cara upacara bendera", "Program pembangunan lima tahun"],
+        ans: 2,
+        exp: "Weltanschauung diartikan sebagai orientasi batiniah, pandangan hidup, atau cara pandang dunia yang dihayati oleh suatu bangsa."
       },
       {
-        id: 3,
-        category: "Subbab C: Kedudukan Pancasila",
-        question: "Kedudukan Pancasila sebagai dasar negara menempatkannya secara yuridis formal sebagai 'grundnorm' dalam tata tertib hukum nasional. Konsekuensi yuridis utama dari kedudukan ini adalah...",
-        options: [
-          "Semua peraturan perundang-undangan di Indonesia tidak boleh bertentangan dengan nilai Pancasila",
-          "Presiden berhak membubarkan lembaga peradilan yang tidak sepaham dengan ideologi negara",
-          "Ketetapan MPR memiliki tingkatan hierarki yang lebih tinggi daripada Pancasila",
-          "Pancasila dapat diamandemen secara berkala mengikuti pergantian kepemimpinan nasional",
-          "Hukum adat lokal secara otomatis gugur tanpa perlu diselaraskan dengan norma keadilan"
-        ],
-        correct: 0,
-        explanation: "Halaman 32-33 menjelaskan bahwa Pancasila merupakan grundnorm (norma dasar tertinggi) yang mendasari UUD NRI 1945 dan seluruh perundang-undangan; semua materi undang-undang tidak boleh bertentangan dengan nilai-nilai Pancasila."
+        cat: "Kedudukan Pancasila",
+        q: "3. Sebagai dasar negara (grundnorm), kedudukan Pancasila dalam tata tertib hukum Indonesia berfungsi sebagai...",
+        opts: ["Sumber dari segala sumber hukum", "Hukum sementara sebelum pemilu", "Instruksi khusus kepala daerah", "Aturan tambahan peradilan agama", "Hukum adat regional"],
+        ans: 0,
+        exp: "Pancasila menempati puncak norma dasar tertib hukum yang mengikat seluruh peraturan perundang-undangan di Indonesia."
       },
       {
-        id: 4,
-        category: "Subbab C: Kedudukan Pancasila",
-        question: "Menurut teori jenjang norma (Stufenbau der Rechtsordnung) oleh Hans Kelsen yang diadopsi dalam sistem hukum Indonesia, posisi norma dasar menempati puncak piramida karena berfungsi untuk...",
-        options: [
-          "Menghapus keberlakuan norma agama dan adat istiadat dalam masyarakat majemuk",
-          "Menjadi sumber validitas dan landasan moral bagi norma-norma hukum di bawahnya",
-          "Membatasi hak warga negara dalam mengajukan uji materiil ke Mahkamah Konstitusi",
-          "Menyusun tata laksana teknis operasional bagi lembaga kementerian eksekutif",
-          "Menyeragamkan seluruh tradisi kebudayaan daerah menjadi satu kultur dominan"
-        ],
-        correct: 1,
-        explanation: "Halaman 33 menguraikan bahwa norma hukum berjenjang dan bersumber dari norma yang lebih tinggi hingga berhenti pada norma dasar (grundnorm), yang memberikan kekuatan dan legitimasi bagi seluruh sistem hukum nasional."
+        cat: "Kedudukan Pancasila",
+        q: "4. Berdasarkan UU No. 12 Tahun 2011 jo. UU No. 13 Tahun 2022, semua produk hukum di Indonesia tidak boleh...",
+        opts: ["Dibuat dalam bentuk tertulis", "Bertentangan dengan nilai-nilai Pancasila", "Diterapkan di tingkat daerah", "Dipublikasikan ke masyarakat", "Diuji di hadapan hakim"],
+        ans: 1,
+        exp: "Sebagai grundnorm, isi norma peraturan di bawahnya tidak boleh bertentangan dengan Pancasila dan UUD 1945."
       },
       {
-        id: 5,
-        category: "Subbab C: Kedudukan Pancasila",
-        question: "Perhatikan pernyataan berikut:\n(1) Sumber dari segala sumber hukum di Indonesia\n(2) Mencakup suasana kebatinan UUD NRI Tahun 1945\n(3) Mewujudkan cita-cita hukum bagi hukum dasar negara\n(4) Sebagai pegangan etika adat lokal suku tertentu\n(5) Menjadi sumber semangat bagi para penyelenggara negara\nPernyataan yang menunjukkan kedudukan Pancasila sebagai dasar negara menurut Buku Pendidikan Pancasila adalah...",
-        options: [
-          "(1), (2), (3), dan (4)",
-          "(1), (2), (3), dan (5)",
-          "(2), (3), (4), dan (5)",
-          "(1), (3), (4), dan (5)",
-          "(1), (2), (4), dan (5)"
-        ],
-        correct: 1,
-        explanation: "Halaman 33-34 secara eksplisit menjabarkan kedudukan Pancasila sebagai dasar negara: (1) sumber segala sumber hukum, (2) mencakup suasana kebatinan UUD 1945, (3) mewujudkan cita-cita hukum, dan (4) menjadi sumber semangat bagi penyelenggara negara. Poin (4) adat suku tertentu adalah keliru."
+        cat: "Kedudukan Pancasila",
+        q: "5. Mengapa jika dasar negara Pancasila dihilangkan, negara Indonesia diibaratkan akan runtuh?",
+        opts: ["Karena Indonesia kehilangan dasar filosofis dan fondasi hukumnya", "Karena anggaran belanja negara akan langsung habis", "Karena gedung parlemen akan ditutup", "Karena pergantian presiden tertunda", "Karena perdagangan luar negeri terhenti"],
+        ans: 0,
+        exp: "Pancasila adalah fondasi tempat berdirinya Republik Indonesia; hilangnya fondasi membuat konstruksi tata kenegaraan runtuh."
       },
       {
-        id: 6,
-        category: "Subbab C: Kedudukan Pancasila",
-        question: "Pancasila memiliki kedudukan sebagai pandangan hidup bangsa (way of life). Hal ini bermakna bahwa nilai-nilai Pancasila berfungsi sebagai...",
-        options: [
-          "Sanksi pidana kurungan bagi setiap warga yang lalai dalam tugas administratif",
-          "Petunjuk dan pedoman bersikap dan bertingkah laku luhur dalam keseharian",
-          "Alat politik penguasa untuk menekan aspirasi kritis masyarakat sipil",
-          "Dasar pemberian grasi dan amnesti secara sepihak oleh presiden",
-          "Sistem pertahanan konvensional dalam menumpas ancaman separatisme bersenjata"
-        ],
-        correct: 1,
-        explanation: "Halaman 31 dan 36 menerangkan Pancasila sebagai pandangan hidup merupakan tata nilai, pedoman, atau pegangan yang mengajarkan setiap warga bertindak luhur dan harmonis dalam bermasyarakat."
+        cat: "Kedudukan Pancasila",
+        q: "6. Pancasila sebagai pandangan hidup bangsa berfungsi sebagai pedoman yang mengajarkan...",
+        opts: ["Tata cara bersikap dan berperilaku luhur dalam keseharian", "Strategi memenangkan persaingan bisnis bebas", "Prosedur penjatuhan pidana kurungan", "Metode penguasaan teknologi asing", "Hak mengabaikan norma sosial"],
+        ans: 0,
+        exp: "Pancasila sebagai way of life membimbing moral, etika, dan perilaku luhur seluruh elemen warga masyarakat."
       },
       {
-        id: 7,
-        category: "Subbab C: Kedudukan Pancasila",
-        question: "Secara etimologis, kata 'ideologi' berasal dari bahasa Yunani 'ideos' dan 'logos'. Dalam konteks kedudukan Pancasila sebagai ideologi negara, pengertian ideologi adalah...",
-        options: [
-          "Instruksi teknis presiden untuk mengatur tata tertib disiplin pegawai negeri sipil",
-          "Kumpulan gagasan, keyakinan menyeluruh yang memandu tata kehidupan bernegara",
-          "Kebijakan militer terpadu dalam memperkuat persenjataan alutsista nasional",
-          "Sistem ekonomi pasar bebas yang menyerahkan harga pada mekanisme penawaran modal",
-          "Gagasan teoritis para pakar akademisi yang tidak mengikat secara kebangsaan"
-        ],
-        correct: 1,
-        explanation: "Halaman 37 mengutip batasan ideologi dari Kaelan: kumpulan konsep/gagasan bersistem dan menyeluruh yang dijadikan pedoman atau bintang penuntun tata kehidupan nasional (politik, ekonomi, sosio-kultural, hankam)."
+        cat: "Kedudukan Pancasila",
+        q: "7. Sila pertama Pancasila mengajarkan bangsa Indonesia untuk...",
+        opts: ["Mewajibkan satu agama seragam", "Beriman dan bertoleransi terhadap ibadah agama lain", "Menghapus ajaran agama tradisional", "Membatasi kegiatan ibadah di ruang tertutup", "Menolak kerja sama dengan pemeluk agama berbeda"],
+        ans: 1,
+        exp: "Sila pertama menuntun pengakuan terhadap Tuhan YME serta toleransi dan penghormatan atas kebebasan beragama."
       },
       {
-        id: 8,
-        category: "Subbab C: Kedudukan Pancasila",
-        question: "Sebagai pandangan hidup, Sila Keempat Pancasila mengajarkan mekanisme penting dalam pengambilan keputusan publik, yaitu...",
-        options: [
-          "Pengambilan suara terbanyak mutlak tanpa perlu mendengar aspirasi minoritas",
-          "Menyerahkan keputusan sepenuhnya kepada arahan figur pemimpin adat setempat",
-          "Musyawarah untuk mufakat dengan mengedepankan akal sehat dan kepentingan bersama",
-          "Mengutamakan kelompok yang memberikan sumbangan dana materiil terbesar",
-          "Memaksakan kehendak individu demi mempercepat penetapan regulasi daerah"
-        ],
-        correct: 2,
-        explanation: "Halaman 31-32 dan 43 menegaskan Sila Keempat mendorong bangsa Indonesia mengedepankan musyawarah untuk mencapai mufakat, menempatkan kepentingan bersama di atas kepentingan pribadi/golongan."
+        cat: "Kedudukan Pancasila",
+        q: "8. Dalam Sila Keempat, Pancasila sebagai pandangan hidup mengedepankan...",
+        opts: ["Kekuasaan individu yang dominan", "Musyawarah untuk mufakat", "Keputusan mutlak pemilik modal", "Pemungutan suara tanpa dialog", "Kehendak kelompok mayoritas semata"],
+        ans: 1,
+        exp: "Sila Keempat mengamanatkan dialog musyawarah untuk mufakat yang berlandaskan kebijaksanaan demi kepentingan umum."
       },
       {
-        id: 9,
-        category: "Subbab C: Kedudukan Pancasila",
-        question: "Fungsi Pancasila sebagai 'leitstar dinamis' (bintang penuntun) sebagaimana dikemukakan oleh BPIP bermakna bahwa Pancasila...",
-        options: [
-          "Merupakan dogma kaku yang menolak segala bentuk modernisasi teknologi",
-          "Mampu memandu arah kemajuan bangsa sesuai evolusi zaman tanpa kehilangan jati diri",
-          "Hanya berlaku pada masa perjuangan fisik kemerdekaan melawan penjajahan",
-          "Dapat digantikan oleh ideologi transnasional bila disetujui mayoritas warga",
-          "Bersifat pasif dan hanya dijadikan pajangan simbolik di ruang-ruang kelas"
-        ],
-        correct: 1,
-        explanation: "Pada Kata Pengantar BPIP (Halaman v) dan materi ideologi, Pancasila sebagai bintang penuntun (leitstar) dinamis mengarahkan langkah evolusioner bangsa dalam menjawab tantangan zaman dan globalisasi."
+        cat: "Kedudukan Pancasila",
+        q: "9. Kata 'ideologi' berasal dari kata 'ideos' dan 'logos' (bahasa Yunani) yang berarti...",
+        opts: ["Aturan perang", "Ilmu tentang ide, gagasan, atau keyakinan", "Peraturan raja", "Kajian sejarah kuno", "Tata laksana ekonomi"],
+        ans: 1,
+        exp: "Ideologi secara harfiah adalah ilmu tentang gagasan, pemikiran, cita-cita, atau keyakinan yang menyeluruh."
       },
       {
-        id: 10,
-        category: "Subbab C: Kedudukan Pancasila",
-        question: "Kedudukan Pancasila dalam hierarki peraturan perundang-undangan Indonesia ditegaskan dalam UU No. 12 Tahun 2011 jo. UU No. 13 Tahun 2022. Posisi Pancasila dinyatakan secara tegas sebagai...",
-        options: [
-          "Peraturan pelaksana teknis di bawah Keputusan Presiden",
-          "Sumber dari segala sumber hukum negara Republik Indonesia",
-          "Salah satu pasal tambahan dalam Batang Tubuh Konstitusi",
-          "Konvensi ketatanegaraan yang keberlakuannya tidak tertulis",
-          "Hukum internasional yang diratifikasi melalui perjanjian bilateral"
-        ],
-        correct: 1,
-        explanation: "Halaman 32-33 dan Bab 2 Halaman 117-118 menegaskan Pancasila adalah sumber dari segala sumber hukum negara yang menjiwai seluruh tata urutan perundang-undangan di Indonesia."
+        cat: "Kedudukan Pancasila",
+        q: "10. Dalam konteks ideologi negara, Pancasila berperan sebagai 'leitstar' yang berarti...",
+        opts: ["Bintang penuntun dinamis dalam penyelenggaraan negara", "Hukum pidana yang kaku", "Perjanjian tertulis yang dapat dibatalkan", "Instruksi militer tertutup", "Sistem ekonomi kapitalistik"],
+        ans: 0,
+        exp: "Pancasila menjadi leitstar (bintang pemandu) bagi arah pembangunan politik, hukum, ekonomi, dan sosio-kultural."
       },
       {
-        id: 11,
-        category: "Subbab C: Kedudukan Pancasila",
-        question: "Jika nilai-nilai Pancasila sebagai dasar negara diabaikan atau dihilangkan dari sendi ketatanegaraan, dampak paling fatal bagi eksistensi Indonesia adalah...",
-        options: [
-          "Birokrasi pemerintahan daerah beralih ke sistem administrasi berbasis digital",
-          "Runtuhnya fondasi hukum dan keteraturan bernegara sehingga memicu disintegrasi bangsa",
-          "Meningkatnya arus investasi asing dalam sektor perindustrian modern nasional",
-          "Terjadinya penataan ulang wilayah batas administratif antarkabupaten di Jawa",
-          "Penurunan anggaran militer pertahanan dalam kerangka diplomasi damai ASEAN"
-        ],
-        correct: 1,
-        explanation: "Halaman 30 dan 32 menyatakan bahwa jika Pancasila sebagai fondasi/dasar negara rusak atau dihilangkan, runtuhlah bangunan negara Indonesia di atasnya, karena kehilangan landasan hukum dan filosofis bersama."
+        cat: "Kedudukan Pancasila",
+        q: "11. 'Natie Indonesia' yang ditegaskan Sukarno pada 1 Juni 1945 mengartikan kebangsaan sebagai...",
+        opts: ["Kelompok suku tertentu di pulau besar", "Kesatuan seluruh manusia Indonesia dari Sabang sampai Merauke", "Perkumpulan saudagar pribumi", "Golongan terpelajar saja", "Masyarakat yang berpusat di kota besar"],
+        ans: 1,
+        exp: "Natie Indonesia adalah kebersatuan seluruh rakyat di kepulauan nusantara dengan tanah airnya secara utuh."
       },
       {
-        id: 12,
-        category: "Subbab C: Kedudukan Pancasila",
-        question: "Dalam pidato 1 Juni 1945, Sukarno menyampaikan konsep 'Natie Indonesia' pada prinsip kebangsaan. Natie Indonesia menurut Sukarno didefinisikan sebagai...",
-        options: [
-          "Kelompok masyarakat yang eksklusif mendiami wilayah kepulauan tertentu",
-          "Satu golongan elit bangsawan yang memegang tampuk pemerintahan birokrasi",
-          "Kesatuan seluruh manusia Indonesia yang mendiami kepulauan dari Sabang sampai Merauke",
-          "Perserikatan paguyuban dagang yang memiliki kepentingan finansial serupa",
-          "Masyarakat perkotaan yang telah mengenyam pendidikan modern ala barat"
-        ],
-        correct: 2,
-        explanation: "Halaman 9 mengutip pidato Sukarno: Bangsa Indonesia (Natie Indonesia) bukanlah sekadar satu golongan atau daerah kecil, melainkan kesatuan seluruh manusia Indonesia dari Sabang sampai Merauke yang bersatu padu dengan tanah airnya."
+        cat: "Kedudukan Pancasila",
+        q: "12. Hubungan formal antara Pancasila dan Pembukaan UUD NRI 1945 ditandai oleh...",
+        opts: ["Pencantuman rumusan lima sila secara sah dalam Alinea IV Pembukaan", "Pemberlakuan hukum adat di daerah", "Pengesahan traktat internasional", "Pengangkatan menteri negara", "Amandemen batang tubuh undang-undang"],
+        ans: 0,
+        exp: "Secara formal-yuridis, rumusan resmi dasar negara termaktub dalam alinea keempat Pembukaan UUD NRI Tahun 1945."
       },
       {
-        id: 13,
-        category: "Subbab C: Kedudukan Pancasila",
-        question: "Pancasila sebagai ideologi negara mencakup dimensi politik, ekonomi, sosio-kultural, dan pertahanan keamanan. Dalam dimensi sosio-kultural, Pancasila berfungsi untuk...",
-        options: [
-          "Meniadakan keanekaragaman budaya daerah demi terciptanya bahasa tunggal",
-          "Menjaga kerukunan dan memayungi keberagaman suku, ras, dan agama secara setara",
-          "Mewajibkan seluruh warga mengadopsi gaya hidup individualistik berbasis modal",
-          "Mengadopsi seluruh kebudayaan asing tanpa seleksi norma kepatutan lokal",
-          "Mendorong kompetisi bebas antarkelompok etnis dalam menguasai sumber daya"
-        ],
-        correct: 1,
-        explanation: "Halaman 37 dan 116 menegaskan bahwa Pancasila merupakan payung keragaman (jembatan kemajemukan) yang memadukan kebhinekaan sosial budaya dalam prinsip persaudaraan dan kesetaraan martabat."
+        cat: "Kedudukan Pancasila",
+        q: "13. Hubungan materiil Pancasila dengan Pembukaan UUD 1945 berarti...",
+        opts: ["UUD 1945 tidak memerlukan dasar moral", "Pokok-pokok pikiran Pembukaan bersumber pada nilai Pancasila", "Keduanya dapat dipisahkan secara hukum", "Pancasila disahkan setelah dekrit presiden", "Konstitusi berdiri tanpa norma dasar"],
+        ans: 1,
+        exp: "Seluruh pokok kaidah negara dalam Pembukaan secara hakiki dan substansial bersumber dari nilai-nilai Pancasila."
       },
       {
-        id: 14,
-        category: "Subbab C: Kedudukan Pancasila",
-        question: "Hubungan antara Pancasila dan Pembukaan UUD NRI Tahun 1945 memiliki sifat formal dan materiel. Hubungan formal terbukti dari fakta bahwa...",
-        options: [
-          "Pancasila digali dari nilai-nilai luhur dan tradisi kepribadian bangsa Indonesia",
-          "Rumusan resmi sila-sila Pancasila tercantum secara sah dalam Alinea IV Pembukaan UUD 1945",
-          "Pancasila dapat diubah kapan saja melalui pemungutan suara sederhana di parlemen",
-          "Naskah Pembukaan UUD 1945 dirancang oleh perwira militer Angkatan Laut Jepang",
-          "Setiap pasal Batang Tubuh Konstitusi tidak mencerminkan pokok-pokok pikiran Pancasila"
-        ],
-        correct: 1,
-        explanation: "Halaman 116-117 menjelaskan bahwa hubungan formal berarti rumusan yuridis dasar negara Pancasila dicantumkan secara resmi dalam naskah hukum tertinggi, yaitu Alinea IV Pembukaan UUD NRI Tahun 1945."
-      },
-      {
-        id: 15,
-        category: "Subbab C: Kedudukan Pancasila",
-        question: "Sila Kelima 'Keadilan Sosial bagi Seluruh Rakyat Indonesia' dalam fungsinya sebagai pandangan hidup bangsa menekankan pentingnya sikap hidup yang...",
-        options: [
-          "Mengutamakan gaya hidup konsumtif dan bermewah-mewah sebagai simbol kesuksesan",
-          "Menumbuhkan rasa tenggang rasa dan gemar menolong saudara yang berkekurangan",
-          "Menyerahkan penanganan kemiskinan sepenuhnya kepada inisiatif perseorangan swasta",
-          "Menutup diri dari pergaulan sosial demi mengamankan kepemilikan harta pribadi",
-          "Membatasi pemberian bantuan sosial hanya kepada masyarakat satu golongan"
-        ],
-        correct: 1,
-        explanation: "Halaman 32 dan 48 menjelaskan bahwa Sila Kelima menghendaki sikap tenggang rasa, menghindari hidup berfoya-foya di tengah kesulitan sesama, dan aktif membantu saudara sebangsa yang miskin atau kekurangan."
-      },
-
-      // KELOMPOK D: AKTUALISASI PANCASILA & ERA DIGITAL (20 Soal)
-      {
-        id: 16,
-        category: "Subbab D: Aktualisasi Pancasila",
-        question: "Menurut Sukarno, Pancasila bukanlah ajaran yang diimpor dari luar negeri, melainkan 'digali dari buminya Indonesia'. Implikasi nilai ini terhadap aktualisasi Pancasila adalah...",
-        options: [
-          "Pancasila cukup dihafalkan dan diucapkan saat upacara bendera hari Senin",
-          "Nilai-nilai Pancasila harus dipraktikkan secara nyata dalam tindakan keseharian",
-          "Pancasila menjadi simbol formalitas yang hanya dipajang di dinding kantor pemerintah",
-          "Nilai-nilai luhur hanya berlaku bagi aparatur sipil negara dan pejabat tinggi",
-          "Penerapan Pancasila harus menunggu instruksi tertulis dari aparat penegak hukum"
-        ],
-        correct: 1,
-        explanation: "Halaman 40 menegaskan Pancasila bukan sekadar hafalan atau lambang Garuda yang dipajang di kelas, melainkan nilai hidup yang digali dari tradisi bangsa dan wajib diaktualisasikan dalam kehidupan nyata sehari-hari."
-      },
-      {
-        id: 17,
-        category: "Subbab D: Aktualisasi Pancasila",
-        question: "Dalam konteks kehidupan berbangsa, penerapan Sila Pertama 'Ketuhanan Yang Maha Esa' diwujudkan melalui sikap...",
-        options: [
-          "Memaksa orang lain untuk mengikuti kepercayaan yang kita yakini paling benar",
-          "Menghalangi peribadatan umat agama lain jika tidak memiliki izin warga mayoritas",
-          "Menjamin kemerdekaan setiap warga beribadah dan membangun kerja sama lintas iman",
-          "Mencampurkan seluruh ajaran agama menjadi satu sistem teologis sinkretis baru",
-          "Menutup dialog antarumat beragama demi menghindari potensi perdebatan terbuka"
-        ],
-        correct: 2,
-        explanation: "Halaman 40 dan 42 menerangkan Sila Pertama menghendaki setiap warga beriman kepada Tuhan YME serta hidup rukun, saling menghormati, dan bekerja sama tanpa mengganggu ritual ibadah agama lain."
-      },
-      {
-        id: 18,
-        category: "Subbab D: Aktualisasi Pancasila",
-        question: "Maraknya kasus perundungan (bullying), diskriminasi, dan ujaran kebencian di lingkungan sekolah merupakan pelanggaran berat terhadap nilai Pancasila, khususnya...",
-        options: [
-          "Sila Pertama, karena melanggar tata tertib peribadatan formal di rumah ibadah",
-          "Sila Kedua, karena merendahkan harkat, derajat, dan martabat luhur sesama manusia",
-          "Sila Ketiga, karena membatasi penggunaan bahasa daerah dalam ruang kelas",
-          "Sila Keempat, karena mengambil keputusan tanpa mekanisme rapat perwakilan kelas",
-          "Sila Kelima, karena tidak membayar iuran kas kelas secara teratur setiap pekan"
-        ],
-        correct: 1,
-        explanation: "Halaman 42 menegaskan Sila Kedua mengakui derajat, hak, dan kewajiban asasi manusia yang setara. Perundungan (bullying), diskriminasi, dan ujaran kebencian secara langsung melanggar nilai kemanusiaan yang adil dan beradab."
-      },
-      {
-        id: 19,
-        category: "Subbab D: Aktualisasi Pancasila",
-        question: "Aktualisasi Sila Ketiga 'Persatuan Indonesia' di tengah kemajemukan bangsa menegaskan prinsip bahwa persatuan bukanlah penyeragaman (homogenisasi), melainkan...",
-        options: [
-          "Dominasi suku mayoritas dalam menentukan seluruh kebijakan kebudayaan nasional",
-          "Pengelompokan pemukiman warga berdasarkan kesamaan latar belakang etnis",
-          "Peleburan keanekaragaman menjadi satu kesatuan harmonis yang saling menghargai",
-          "Pemberian otonomi mutlak bagi daerah untuk memisahkan diri dari negara kesatuan",
-          "Pengabaian simbol dan tradisi adat lokal demi memprioritaskan budaya modern"
-        ],
-        correct: 2,
-        explanation: "Halaman 42 dan 87 menggarisbawahi bahwa persatuan bukan bermakna penyeragaman dari keragaman yang ada, melainkan bersatu padu dan kompak dalam kebinekaan untuk memajukan NKRI."
-      },
-      {
-        id: 20,
-        category: "Subbab D: Aktualisasi Pancasila",
-        question: "Seorang ketua kelas mendapati dua kelompok siswa berselisih paham mengenai jadwal piket kebersihan. Tindakan ketua kelas yang mencerminkan aktualisasi Sila Keempat adalah...",
-        options: [
-          "Memberikan sanksi denda finansial kepada kelompok yang kalah dalam perdebatan",
-          "Memfasilitasi musyawarah mufakat untuk mendengar alasan kedua belah pihak secara adil",
-          "Memutuskan pembagian jadwal secara sepihak tanpa meminta pertimbangan anggota kelas",
-          "Membiarkan perselisihan berlarut-larut agar siswa belajar menyelesaikan masalah sendiri",
-          "Melaporkan seluruh siswa kepada pihak kepolisian atas tuduhan tindakan kriminal"
-        ],
-        correct: 1,
-        explanation: "Halaman 43 menyatakan bahwa Sila Keempat menuntut penyelesaian permasalahan bersama melalui musyawarah dengan bijaksana, mengakui kesetaraan hak, dan menjauhi sikap otoritatif."
-      },
-      {
-        id: 21,
-        category: "Subbab D: Aktualisasi Pancasila",
-        question: "Di suatu desa majemuk di Bali, terdapat tradisi 'ngejot' yaitu tradisi saling berbagi makanan antartetangga saat hari raya keagamaan (antara pemeluk Hindu dan Islam). Tradisi kearifan lokal ini merupakan wujud nyata penerapan...",
-        options: [
-          "Sistem persaingan ekonomi bebas untuk mencari keuntungan dagang",
-          "Harmoni dan toleransi antarumat beragama dalam bingkai persaudaraan kebangsaan",
-          "Perjanjian formal kenegaraan yang memiliki konsekuensi sanksi denda pidana",
-          "Asas monopoli kebudayaan oleh kelompok minoritas terhadap warga pendatang",
-          "Kewajiban administratif yang diatur oleh peraturan menteri dalam negeri"
-        ],
-        correct: 1,
-        explanation: "Halaman 47 menyebut tradisi ngejot di Bali sebagai teladan kearifan lokal yang mempererat toleransi, kerukunan, dan persaudaraan sejati antara pemeluk agama Islam dan Hindu."
-      },
-      {
-        id: 22,
-        category: "Subbab D: Aktualisasi Pancasila",
-        question: "Kearifan lokal di Maluku bernama 'Pela Gandong' dan tradisi 'Bakar Batu' di Papua memiliki peran penting dalam aktualisasi Pancasila sebagai sarana...",
-        options: [
-          "Melakukan protes terhadap kebijakan pembangunan infrastruktur pemerintah pusat",
-          "Membangun komitmen persaudaraan, rekonsiliasi, dan penyelesaian konflik secara damai",
-          "Mengumpulkan pajak hasil perkebunan untuk disetorkan kepada kas perbendaharaan daerah",
-          "Menyusun tata laksana pemilihan kepala suku berdasarkan hukum peradilan positif",
-          "Menghalangi masuknya pendatang baru yang berbeda keyakinan atau suku bangsa"
-        ],
-        correct: 1,
-        explanation: "Halaman 47 menjelaskan bahwa pela gandong di Maluku mengikat persaudaraan lintas agama, dan bakar batu di Papua berfungsi mencari solusi damai atas konflik, mencerminkan nilai persatuan dan musyawarah."
-      },
-      {
-        id: 23,
-        category: "Subbab D: Aktualisasi Pancasila",
-        question: "Perkembangan teknologi informasi di era Revolusi Industri 4.0 diibaratkan seperti pisau bermata dua. Sisi positif kemajuan teknologi bagi pengamalan Pancasila adalah...",
-        options: [
-          "Kemudahan menyebarkan konten provokatif tanpa dapat dilacak oleh penegak hukum",
-          "Sarana mengampanyekan nilai-nilai luhur dan kearifan Indonesia ke kancah global",
-          "Kesempatan mengunduh karya cipta digital orang lain secara bebas tanpa izin",
-          "Kemudahan membentuk kelompok eksklusif daring yang menentang ideologi negara",
-          "Peluang menyebarkan berita sensasional tanpa verifikasi fakta demi popularitas"
-        ],
-        correct: 1,
-        explanation: "Halaman 46-47 menyebut teknologi memberi peluang emas untuk mengampanyekan nilai Pancasila dan kerukunan kebinekaan Indonesia ke seluruh dunia sebagai inspirasi perdamaian global."
-      },
-      {
-        id: 24,
-        category: "Subbab D: Aktualisasi Pancasila",
-        question: "Tantangan serius penerapan Sila Ketiga di era media sosial berdasarkan data riset yang diuraikan dalam Buku Siswa adalah maraknya...",
-        options: [
-          "Penggunaan aplikasi pembayaran digital yang mempercepat transaksi ekonomi mikro",
-          "Penyebaran berita bohong (hoaks) dan ujaran kebencian yang memicu polarisasi warga",
-          "Peningkatan kuota beasiswa pendidikan vokasi bagi pelajar di pelosok daerah 3T",
-          "Pengembangan konten edukatif berbasis animasi oleh kreator konten muda",
-          "Pemanfaatan media daring untuk menggalang donasi pengobatan warga kurang mampu"
-        ],
-        correct: 1,
-        explanation: "Halaman 47-48 dan 50 menerangkan bahwa tantangan besar era digital adalah penyebaran hoaks (berita palsu) dan ujaran kebencian (hate speech) yang berpotensi merusak integrasi dan persatuan bangsa."
-      },
-      {
-        id: 25,
-        category: "Subbab D: Aktualisasi Pancasila",
-        question: "Aktivitas penggalangan dana secara daring melalui media sosial untuk membantu biaya pengobatan orang sakit atau renovasi rumah warga miskin dikenal dengan istilah...",
-        options: [
-          "Cyber bullying",
-          "Social engineering",
-          "Crowdfunding",
-          "Judicial review",
-          "Money politics"
-        ],
-        correct: 2,
-        explanation: "Halaman 48 secara eksplisit menyebut aktivitas mengumpulkan dana sukarela melalui platform media sosial untuk kebaikan dan tolong-menolong dinamakan crowdfunding."
-      },
-      {
-        id: 26,
-        category: "Subbab D: Aktualisasi Pancasila",
-        question: "Sikap kritis dan solutif yang tepat dilakukan oleh seorang pelajar Pancasila ketika menerima tautan berita dengan judul yang sangat provokatif di grup perpesanan adalah...",
-        options: [
-          "Langsung membagikan tautan tersebut ke seluruh grup kontak agar segera viral",
-          "Memverifikasi keaslian fakta dan kredibilitas sumber sebelum memutuskan membagikannya",
-          "Menambahkan komentar opini pribadi yang emosional untuk memancing perdebatan",
-          "Menghapus aplikasi perpesanan secara permanen tanpa melakukan verifikasi apapun",
-          "Mempercayai sepenuhnya isi pesan karena diteruskan dari anggota keluarga terdekat"
-        ],
-        correct: 1,
-        explanation: "Halaman 47, 53 (kasus 2), dan Halaman 97-98 menekankan prinsip 'Saring sebelum Sharing', memeriksa kebenaran fakta dan sumber berita resmi guna menangkal penyebaran hoaks."
-      },
-      {
-        id: 27,
-        category: "Subbab D: Aktualisasi Pancasila",
-        question: "Dalam studi kasus di buku teks, Rita mengalami perundungan siber (cyberbullying) melalui komentar pedas dari akun anonim setelah mengunggah video prestasinya. Gagasan solutif yang beretika Pancasila bagi Rita adalah...",
-        options: [
-          "Membalas pelaku dengan kata-kata makian kasar menggunakan akun palsu tandingan",
-          "Merasa putus asa, mengurung diri, dan memutuskan untuk berhenti belajar di sekolah",
-          "Menanggapi kritik yang membangun secara bijak serta melaporkan perundungan kepada guru/pihak berwenang",
-          "Merekrut teman sebaya untuk melakukan intimidasi fisik langsung terhadap terduga pelaku",
-          "Menyebarkan identitas pribadi orang yang dicurigai tanpa bukti hukum yang jelas"
-        ],
-        correct: 2,
-        explanation: "Halaman 53 (Uji Kompetensi 1.5 Kasus 1) membahas kasus Rita: sikap terbaik adalah tetap tenang, menyaring komentar secara positif, serta menindaklanjuti ujaran kebencian atau perundungan secara prosedural dan beradab."
-      },
-      {
-        id: 28,
-        category: "Subbab D: Aktualisasi Pancasila",
-        question: "Seseorang yang secara sengaja menyebarkan hoaks bernuansa SARA di media sosial hingga menimbulkan kegaduhan publik bertentangan dengan aktualisasi Sila...",
-        options: [
-          "Pertama saja, karena melanggar rukun peribadatan",
-          "Kedua dan Ketiga, karena merusak martabat kemanusiaan dan mengancam persatuan",
-          "Keempat saja, karena tidak mengindahkan aturan tata tertib persidangan parlemen",
-          "Kelima saja, karena tidak membagikan keuntungan ekonomi iklan digital secara merata",
-          "Tidak bertentangan dengan sila mana pun karena merupakan hak kebebasan berekspresi mutlak"
-        ],
-        correct: 1,
-        explanation: "Ujaran bernuansa kebencian dan permusuhan SARA merusak harkat manusia (Sila 2) serta merobek keharmonisan dan keutuhan persatuan kebangsaan (Sila 3), sebagaimana diuraikan pada halaman 42, 49, dan 50."
-      },
-      {
-        id: 29,
-        category: "Subbab D: Aktualisasi Pancasila",
-        question: "Menurut Pasal 33 UUD NRI Tahun 1945 dan materi Sistem Ekonomi Pancasila pada Buku Siswa, perekonomian nasional disusun sebagai usaha bersama berdasar atas asas...",
-        options: [
-          "Persaingan modal bebas",
-          "Kekeluargaan",
-          "Sentralisme birokrasi",
-          "Monopoli korporasi",
-          "Individualisme rasional"
-        ],
-        correct: 1,
-        explanation: "Halaman 137 dan 158 menegaskan bahwa Sistem Ekonomi Pancasila didasarkan pada Pasal 33 ayat (1) UUD NRI Tahun 1945, yaitu usaha bersama yang berdasar atas asas kekeluargaan dan gotong royong."
-      },
-      {
-        id: 30,
-        category: "Subbab D: Aktualisasi Pancasila",
-        question: "Bung Hatta menegaskan bahwa badan usaha yang paling cocok dengan jiwa gotong royong dan menjadi sokoguru perekonomian Indonesia adalah...",
-        options: [
-          "Badan Usaha Milik Swasta Asing",
-          "Firma Penanaman Modal Ventura",
-          "Koperasi",
-          "Perusahaan Terbuka Multinasional",
-          "Konglomerasi Monopoli Pasar"
-        ],
-        correct: 2,
-        explanation: "Halaman 138-139 menggarisbawahi pemikiran Bung Hatta bahwa koperasi adalah sokoguru perekonomian nasional karena berakar kuat pada tradisi gotong royong dan demokrasi ekonomi dari, oleh, dan untuk anggota."
-      },
-      {
-        id: 31,
-        category: "Subbab D: Aktualisasi Pancasila",
-        question: "Salah satu gagasan solutif untuk mengatasi ketimpangan ekonomi dan membumikan Sila Kelima Pancasila menurut modul ajar adalah...",
-        options: [
-          "Menghapuskan seluruh kepemilikan aset tanah perseorangan di pedesaan",
-          "Memberdayakan sektor UMKM serta memfasilitasi akses permodalan dan regulasi yang adil",
-          "Menutup hubungan kerja sama perdagangan ekspor dan impor dengan negara luar",
-          "Menyerahkan seluruh pengelolaan sumber daya alam kepada pemilik modal swasta terbesar",
-          "Membiarkan mekanisme pasar bebas berjalan tanpa intervensi perlindungan jaminan sosial"
-        ],
-        correct: 1,
-        explanation: "Halaman 51 dan 143 menguraikan bahwa solusi ketimpangan adalah pemberdayaan masyarakat dan UMKM secara terencana dengan dukungan akses permodalan, perlindungan persaingan usaha, dan jaminan sosial pemerintah."
-      },
-      {
-        id: 32,
-        category: "Subbab D: Aktualisasi Pancasila",
-        question: "Prinsip 'Keadilan' dalam paradigma pembangunan Pancasila menekankan konsep 'Equity' (kepantasan/proporsional), bukan sekadar 'Equality' (kesamaan mutlak). Makna dari penerapan asas ini adalah...",
-        options: [
-          "Pemberian bantuan materiil dengan jumlah rupiah yang persis sama tanpa melihat kondisi penerima",
-          "Pemenuhan hak warga negara disesuaikan secara proporsional dengan tingkat kebutuhan riilnya",
-          "Pembagian sumber daya yang hanya mengutamakan masyarakat di wilayah ibukota negara",
-          "Penghapusan seluruh subsidi fasilitas umum agar setiap orang membayar dengan tarif sama",
-          "Pemberian perlakuan istimewa kepada kelompok yang memiliki jabatan dan kekayaan tinggi"
-        ],
-        correct: 1,
-        explanation: "Halaman 86 (dan 102) menerangkan konsep kepantasan (equity): keadilan terwujud ketika hak diberikan secara proporsional berbasis kebutuhan nyata individu, bukan semata membagikan nominal yang sama rata."
-      },
-      {
-        id: 33,
-        category: "Subbab D: Aktualisasi Pancasila",
-        question: "Pada Skenario Kasus 3 dalam Uji Kompetensi bab, muncul pertanyaan reflektif: 'Apakah pelajar pernah melakukan korupsi?'. Contoh perilaku pelajar di sekolah yang bertentangan dengan nilai integritas Pancasila dan merupakan bibit korupsi adalah...",
-        options: [
-          "Membeli buku pelajaran di koperasi sekolah menggunakan uang saku pribadi",
-          "Menyontek saat ujian dan menggunakan sisa uang kas kelas untuk jajan pribadi tanpa izin",
-          "Mencalonkan diri menjadi ketua organisasi siswa melalui proses pemilihan demokratis",
-          "Mengumpulkan tugas proyek kewarganegaraan tepat waktu sebelum batas akhir",
-          "Mengajukan pertanyaan kritis kepada guru terkait materi pelajaran yang belum dipahami"
-        ],
-        correct: 1,
-        explanation: "Halaman 95-96 secara eksplisit menyebut tindakan menyontek saat ujian serta menggelapkan sisa uang titipan buku atau uang kas kelas sebagai bentuk perilaku curang dan benih mental korupsi di kalangan pelajar."
-      },
-      {
-        id: 34,
-        category: "Subbab D: Aktualisasi Pancasila",
-        question: "Di era konvergensi media digital, peserta didik dituntut memiliki kecakapan 'Literasi Digital Berkarakter Pancasila'. Kompetensi utama yang diharapkan dari literasi tersebut adalah...",
-        options: [
-          "Mampu meretas sistem keamanan informasi demi kepentingan pembuktian keahlian koding",
-          "Mampu memproduksi, menyaring, dan menyebarkan konten positif yang memperkokoh kebinekaan",
-          "Menggunakan media sosial tanpa henti sepanjang hari demi mengejar jumlah pengikut",
-          "Menyalin konten karya kreator lain tanpa menyertakan tautan sumber referensi asli",
-          "Mengabaikan tata krama kesopanan saat berdebat di kolom komentar akun pejabat publik"
-        ],
-        correct: 1,
-        explanation: "Halaman 47, 51-52, dan rangkuman Bab 1 menjelaskan literasi digital Pelajar Pancasila diwujudkan lewat kemampuan memproduksi konten edukatif, menyaring disinformasi, dan menyuarakan persatuan dalam kebinekaan."
-      },
-      {
-        id: 35,
-        category: "Subbab D: Aktualisasi Pancasila",
-        question: "Dalam infografik '7 Impian Indonesia 2015-2085' pada Bab 1 Buku Siswa, salah satu impian bangsa yang berkaitan erat dengan pemantapan nilai etika dan ideologi Pancasila adalah...",
-        options: [
-          "Menjadi negara adidaya militer yang menguasai pangkalan tempur di berbagai benua",
-          "Masyarakat Indonesia yang menjunjung pluralisme, berbudaya, religius, dan bebas korupsi",
-          "Meniadakan seluruh sektor usaha mikro tradisional dan menggantinya dengan korporasi",
-          "Membatasi interaksi diplomatik dengan organisasi multilateral dunia seperti PBB",
-          "Menerapkan sistem kewarganegaraan ganda tanpa batas bagi seluruh ekspatriat asing"
-        ],
-        correct: 1,
-        explanation: "Halaman 38 merinci 7 Impian Indonesia 2015-2085: (1) SDM unggul, (2) Masyarakat menjunjung pluralisme, berbudaya, religius, dan beretika, (3) Pusat pendidikan/teknologi, (4) Bebas perilaku korupsi, (5) Infrastruktur merata, (6) Mandiri di Asia Pasifik, (7) Barometer ekonomi."
-      }
-    ];
-
-    // STATE APLIKASI
-    let currentQuestionIndex = 0;
-    let userAnswers = new Array(questionsData.length).fill(null);
-    let participantName = "";
-    let quizStartTime = null;
-    let timerInterval = null;
-
-    // FUNGSI INSIALISASI DAN TIMER
-    function startQuiz() {
-      const nameInput = document.getElementById('userName');
-      const nameError = document.getElementById('name-error');
-      
-      if (!nameInput.value.trim()) {
-        nameError.classList.remove('hidden');
-        nameInput.focus();
-        return;
-      }
-      
-      nameError.classList.add('hidden');
-      participantName = nameInput.value.trim();
-
-      // Transisi Layar
-      document.getElementById('start-view').classList.add('hidden');
-      document.getElementById('quiz-view').classList.remove('hidden');
-      document.getElementById('quiz-meta-badge').classList.remove('hidden');
-
-      // Inisialisasi Palette
-      buildPalette();
-      
-      // Load Soal Pertama
-      currentQuestionIndex = 0;
-      loadQuestion(currentQuestionIndex);
-
-      // Mulai Timer
-      quizStartTime = new Date();
-      timerInterval = setInterval(updateTimer, 1000);
-    }
-
-    function updateTimer() {
-      const now = new Date();
-      const elapsedSeconds = Math.floor((now - quizStartTime) / 1000);
-      const minutes = String(Math.floor(elapsedSeconds / 60)).padStart(2, '0');
-      const seconds = String(elapsedSeconds % 60).padStart(2, '0');
-      document.getElementById('timer-display').innerText = `${minutes}:${seconds}`;
-    }
-
-    // PALETTE GRID
-    function buildPalette() {
-      const grid = document.getElementById('palette-grid');
-      grid.innerHTML = "";
-      for (let i = 0; i < questionsData.length; i++) {
-        const btn = document.createElement('button');
-        btn.id = `palette-btn-${i}`;
-        btn.innerText = i + 1;
-        btn.className = "h-9 w-full rounded-xl font-bold text-xs border border-slate-200 text-slate-600 hover:border-red-500 transition flex items-center justify-center";
-        btn.onclick = () => jumpToQuestion(i);
-        grid.appendChild(btn);
-      }
-      updatePaletteState();
-    }
-
-    function updatePaletteState() {
-      for (let i = 0; i < questionsData.length; i++) {
-        const btn = document.getElementById(`palette-btn-${i}`);
-        if (!btn) continue;
-        
-        btn.className = "h-9 w-full rounded-xl font-bold text-xs transition flex items-center justify-center ";
-        if (i === currentQuestionIndex) {
-          btn.className += "bg-red-600 text-white ring-2 ring-red-400 shadow-md";
-        } else if (userAnswers[i] !== null) {
-          btn.className += "bg-slate-800 text-white border-transparent";
-        } else {
-          btn.className += "bg-white text-slate-700 border border-slate-200 hover:bg-slate-50";
-        }
-      }
-
-      // Update terhitung
-      const answered = userAnswers.filter(ans => ans !== null).length;
-      document.getElementById('answered-count').innerText = answered;
-    }
-
-    // LOAD SOAL
-    function loadQuestion(index) {
-      currentQuestionIndex = index;
-      const q = questionsData[index];
-
-      // Update Label
-      document.getElementById('current-q-num').innerText = index + 1;
-      document.getElementById('question-category').innerText = q.category;
-      document.getElementById('question-text').innerText = q.question;
-
-      // Update Progress Bar
-      const percentProgress = ((index + 1) / questionsData.length) * 100;
-      document.getElementById('quiz-progress-bar').style.width = `${percentProgress}%`;
-
-      // Render Pilihan Jawaban
-      const container = document.getElementById('options-container');
-      container.innerHTML = "";
-
-      const optionLabels = ['A', 'B', 'C', 'D', 'E'];
-      q.options.forEach((optText, optIdx) => {
-        const isSelected = userAnswers[index] === optIdx;
-        const optBtn = document.createElement('button');
-        optBtn.className = `w-full text-left p-4 rounded-2xl border transition-all flex items-start gap-3.5 group ${
-          isSelected 
-            ? 'bg-red-50/80 border-red-600 ring-2 ring-red-600/20 text-slate-900 shadow-sm' 
-            : 'bg-white border-slate-200/90 text-slate-700 hover:border-slate-300 hover:bg-slate-50'
-        }`;
-        optBtn.onclick = () => selectOption(optIdx);
-
-        optBtn.innerHTML = `
-          <div class="w-7 h-7 rounded-xl flex-shrink-0 flex items-center justify-center font-bold text-xs transition ${
-            isSelected 
-              ? 'bg-red-600 text-white shadow-md' 
-              : 'bg-slate-100 text-slate-600 group-hover:bg-slate-200'
-          }">
-            ${optionLabels[optIdx]}
-          </div>
-          <div class="text-sm sm:text-base font-normal leading-relaxed pt-0.5">
-            ${optText}
-          </div>
-        `;
-        container.appendChild(optBtn);
-      });
-
-      // Update Nav Buttons State
-      document.getElementById('prev-btn').disabled = (index === 0);
-      document.getElementById('prev-btn').classList.toggle('opacity-40', index === 0);
-      document.getElementById('prev-btn').classList.toggle('cursor-not-allowed', index === 0);
-
-      const isLast = (index === questionsData.length - 1);
-      document.getElementById('next-btn').classList.toggle('hidden', isLast);
-      document.getElementById('finish-btn').classList.toggle('hidden', !isLast);
-
-      updatePaletteState();
-    }
-
-    function selectOption(optIdx) {
-      userAnswers[currentQuestionIndex] = optIdx;
-      loadQuestion(currentQuestionIndex);
-    }
-
-    function navQuestion(step) {
-      const target = currentQuestionIndex + step;
-      if (target >= 0 && target < questionsData.length) {
-        loadQuestion(target);
-      }
-    }
-
-    function jumpToQuestion(idx) {
-      loadQuestion(idx);
-    }
-
-    function confirmSubmitQuiz() {
-      const unanswered = userAnswers.filter(ans => ans === null).length;
-      if (unanswered > 0) {
-        const ok = confirm(`Masih terdapat ${unanswered} soal yang belum dijawab. Yakin ingin mengakhiri kuis dan melihat hasil asesmen?`);
-        if (!ok) return;
-      } else {
-        const ok = confirm("Seluruh soal telah dijawab. Kirim jawaban Anda sekarang?");
-        if (!ok) return;
-      }
-      finishQuiz();
-    }
-
-    // HITUNG HASIL DAN TAMPILKAN EVALUASI
-    function finishQuiz() {
-      clearInterval(timerInterval);
-      
-      let correctCount = 0;
-      questionsData.forEach((q, idx) => {
-        if (userAnswers[idx] === q.correct) {
-          correctCount++;
-        }
-      });
-
-      const totalQuestions = questionsData.length;
-      const wrongCount = totalQuestions - correctCount;
-      const percentage = Math.round((correctCount / totalQuestions) * 100);
-      const isPassed = percentage >= 85; // Kriteria Kelulusan 85%
-
-      // Sembunyikan Kuis, Tampilkan Hasil
-      document.getElementById('quiz-view').classList.add('hidden');
-      document.getElementById('result-view').classList.remove('hidden');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-
-      // Render Ringkasan
-      document.getElementById('final-percentage').innerText = `${percentage}%`;
-      document.getElementById('final-correct').innerText = correctCount;
-      document.getElementById('final-wrong').innerText = wrongCount;
-
-      const badgeIcon = document.getElementById('result-badge-icon');
-      const title = document.getElementById('result-status-title');
-      const subtitle = document.getElementById('result-status-subtitle');
-      const actionContainer = document.getElementById('result-actions');
-
-      actionContainer.innerHTML = "";
-
-      if (isPassed) {
-        // LULUS (>= 85%)
-        badgeIcon.className = "w-20 h-20 rounded-3xl mx-auto flex items-center justify-center text-4xl mb-4 bg-emerald-100 text-emerald-600 shadow-inner";
-        badgeIcon.innerHTML = `<i class="fa-solid fa-medal"></i>`;
-        title.innerHTML = `Selamat, <span class="text-emerald-600">${participantName}</span>! Anda Dinyatakan LULUS`;
-        subtitle.innerText = `Pencapaian nilai Anda (${percentage}%) melampaui kriteria kelulusan minimal 85%. Anda berhak menerima E-Sertifikat Kelulusan Resmi.`;
-
-        // Tombol Klaim Sertifikat
-        actionContainer.innerHTML = `
-          <button onclick="showCertificate(${percentage})" class="px-6 py-3.5 bg-gradient-to-r from-red-600 to-rose-700 hover:from-red-700 hover:to-rose-800 text-white font-bold rounded-xl shadow-lg shadow-red-600/30 transition flex items-center gap-2">
-            <i class="fa-solid fa-file-certificate"></i>
-            <span>Buka & Cetak E-Sertifikat Kelulusan</span>
-          </button>
-          <button onclick="restartQuiz()" class="px-5 py-3.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl transition text-sm flex items-center gap-2">
-            <i class="fa-solid fa-rotate-right"></i>
-            <span>Uji Coba Ulang</span>
-          </button>
-        `;
-      } else {
-        // TIDAK LULUS (< 85%)
-        badgeIcon.className = "w-20 h-20 rounded-3xl mx-auto flex items-center justify-center text-4xl mb-4 bg-rose-100 text-rose-600 shadow-inner";
-        badgeIcon.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i>`;
-        title.innerHTML = `Mohon Maaf, <span class="text-rose-600">${participantName}</span>. Belum Memenuhi Kriteria`;
-        subtitle.innerText = `Nilai Anda adalah ${percentage}%. Sesuai kriteria akademik, minimal ketuntasan adalah 85% (minimal 30 soal benar). Anda diwajibkan mempelajari pembahasan di bawah ini dan mengulang tes kembali.`;
-
-        // Tombol Wajib Ulang
-        actionContainer.innerHTML = `
-          <button onclick="restartQuiz()" class="px-6 py-3.5 bg-gradient-to-r from-rose-600 to-red-700 hover:from-rose-700 hover:to-red-800 text-white font-bold rounded-xl shadow-lg shadow-rose-600/30 transition flex items-center gap-2">
-            <i class="fa-solid fa-rotate-left"></i>
-            <span>Wajib Mengulang Asesmen Sekarang</span>
-          </button>
-        `;
-      }
-
-      // Render Rincian Kunci Jawaban & Pembahasan
-      renderExplanations();
-    }
-
-    function renderExplanations() {
-      const list = document.getElementById('explanations-list');
-      list.innerHTML = "";
-      const optionLabels = ['A', 'B', 'C', 'D', 'E'];
-
-      questionsData.forEach((q, idx) => {
-        const uAns = userAnswers[idx];
-        const isRight = (uAns === q.correct);
-
-        const card = document.createElement('div');
-        card.className = `p-5 sm:p-6 rounded-2xl border ${isRight ? 'border-emerald-200 bg-emerald-50/20' : 'border-rose-200 bg-rose-50/20'} space-y-3`;
-
-        let statusBadge = isRight 
-          ? `<span class="inline-flex items-center gap-1 text-xs font-bold text-emerald-700 bg-emerald-100 px-2.5 py-1 rounded-md"><i class="fa-solid fa-check"></i> Jawaban Benar</span>`
-          : `<span class="inline-flex items-center gap-1 text-xs font-bold text-rose-700 bg-rose-100 px-2.5 py-1 rounded-md"><i class="fa-solid fa-xmark"></i> Jawaban Salah / Belum Terjawab</span>`;
-
-        let userChoiceText = (uAns !== null) 
-          ? `<strong>(${optionLabels[uAns]})</strong> ${q.options[uAns]}` 
-          : `<em class="text-slate-400">Tidak menjawab</em>`;
-
-        card.innerHTML = `
-          <div class="flex items-center justify-between">
-            <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Soal Nomor ${idx + 1} &bull; ${q.category}</span>
-            ${statusBadge}
-          </div>
-          <p class="font-semibold text-slate-900 text-sm sm:text-base leading-relaxed">${q.question}</p>
-          
-          <div class="text-xs sm:text-sm space-y-1 pt-2">
-            <div class="${isRight ? 'text-emerald-800' : 'text-rose-800'}">
-              <span class="font-bold">Jawaban Anda:</span> ${userChoiceText}
-            </div>
-            <div class="text-emerald-800">
-              <span class="font-bold">Kunci Jawaban yang Benar:</span> <strong>(${optionLabels[q.correct]})</strong> ${q.options[q.correct]}
-            </div>
-          </div>
-
-          <div class="mt-3 p-3.5 bg-white/80 rounded-xl border border-slate-200/80 text-xs sm:text-sm text-slate-700 leading-relaxed">
-            <strong class="text-slate-900 flex items-center gap-1.5 mb-1">
-              <i class="fa-solid fa-lightbulb text-amber-500"></i> Pembahasan Analitis:
-            </strong>
-            ${q.explanation}
-          </div>
-        `;
-        list.appendChild(card);
-      });
-    }
-
-    // SERTIFIKAT
-    function showCertificate(scorePercent) {
-      document.getElementById('result-view').classList.add('hidden');
-      document.getElementById('certificate-view').classList.remove('hidden');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-
-      // Isi Data Sertifikat
-      document.getElementById('cert-name').innerText = participantName;
-      document.getElementById('cert-score').innerText = `${scorePercent}%`;
-      
-      const randNum = Math.floor(1000 + Math.random() * 9000);
-      document.getElementById('cert-number').innerText = `PP-X/BPIP/${new Date().getFullYear()}/${randNum}`;
-
-      const options = { year: 'numeric', month: 'long', day: 'numeric' };
-      document.getElementById('cert-date').innerText = new Date().toLocaleDateString('id-ID', options);
-    }
-
-    function backToResult() {
-      document.getElementById('certificate-view').classList.add('hidden');
-      document.getElementById('result-view').classList.remove('hidden');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    function restartQuiz() {
-      userAnswers = new Array(questionsData.length).fill(null);
-      document.getElementById('result-view').classList.add('hidden');
-      document.getElementById('certificate-view').classList.add('hidden');
-      document.getElementById('quiz-view').classList.remove('hidden');
-
-      buildPalette();
-      loadQuestion(0);
-
-      quizStartTime = new Date();
-      clearInterval(timerInterval);
-      timerInterval = setInterval(updateTimer, 1000);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  </script>
-</body>
-</html>
-```eof
+        cat: "Kedudukan Pancasila",
+        q: "14. Mengapa Pancasila disebut sebagai 'payung keberagaman'?",
+        opts: ["Karena mampu mewadahi keragaman suku, ras, dan agama dalam kesetaraan", "Karena menyeragamkan seluruh dialek bahasa daerah", "Karena membatasi kebebasan berbicara warga", "Karena melarang upacara adat lokal", "Karena memusatkan kebudayaan di ibukota"],
+        ans: 0,
+        exp: "Pancasila menjadi titik temu (*
